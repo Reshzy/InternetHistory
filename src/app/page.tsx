@@ -3,6 +3,7 @@ import { Cursor } from "@/components/primitives/Cursor";
 import { BootScene } from "@/components/scenes/BootScene";
 import { EraPlaceholder } from "@/components/scenes/EraPlaceholder";
 import { Web1995Scene } from "@/components/scenes/Web1995Scene";
+import { WildWebScene } from "@/components/scenes/WildWebScene";
 import { eras } from "@/lib/eras";
 
 const placeholderEras = eras.filter((era) => era.status === "placeholder");
@@ -21,6 +22,7 @@ export default function Home() {
       <main>
         <BootScene />
         <Web1995Scene />
+        <WildWebScene />
         {placeholderEras.map((era) => (
           <EraPlaceholder key={era.id} era={era} />
         ))}

@@ -40,7 +40,7 @@ Confirmed for v1:
 - No Three.js until later phases explicitly need it
 - No clone of a specific commercial OS, browser, or social network
 
-Current implementation scope is Phases 0–2 only: foundation, museum shell, Boot, and 1995. Later eras exist as navigable placeholders.
+Current implementation scope is Phases 0–4: foundation, museum shell, Boot, 1995 Document Web, 1999 Wild Web, 2004 Social Web, and 2007 Mobile Shift. Later eras exist as navigable placeholders.
 
 Explicitly not v1: optional audio, WebGL tunnels, CMS, localization, user-submitted memories, analytics, multiplayer, or a complete academic history of the internet.
 

@@ -28,7 +28,9 @@ export const eras: Era[] = [
     shortTitle: "Wild",
     theme: "wild",
     statement: "EVERYONE GOT A CORNER OF THE INTERNET.",
-    status: "placeholder",
+    support:
+      "Homepages were handmade. Backgrounds tiled. Guestbooks proved you existed.",
+    status: "built",
   },
   {
     id: "social-web",
@@ -37,7 +39,9 @@ export const eras: Era[] = [
     shortTitle: "Social",
     theme: "social",
     statement: "THE WEB STOPPED BEING PAGES. IT BECAME PEOPLE.",
-    status: "placeholder",
+    support:
+      "Profiles replaced homepages. Friends became infrastructure.",
+    status: "built",
   },
   {
     id: "mobile-web",
@@ -46,7 +50,9 @@ export const eras: Era[] = [
     shortTitle: "Mobile",
     theme: "mobile",
     statement: "THEN THE WEB LEFT THE DESK.",
-    status: "placeholder",
+    support:
+      "The same sites had to fit a pocket. Navigation collapsed. Fingers replaced the mouse.",
+    status: "built",
   },
   {
     id: "platform-web",
