@@ -2,6 +2,8 @@ import { MuseumNav } from "@/components/chrome/MuseumNav";
 import { Cursor } from "@/components/primitives/Cursor";
 import { BootScene } from "@/components/scenes/BootScene";
 import { EraPlaceholder } from "@/components/scenes/EraPlaceholder";
+import { MobileWebScene } from "@/components/scenes/MobileWebScene";
+import { SocialWebScene } from "@/components/scenes/SocialWebScene";
 import { Web1995Scene } from "@/components/scenes/Web1995Scene";
 import { WildWebScene } from "@/components/scenes/WildWebScene";
 import { eras } from "@/lib/eras";
@@ -23,6 +25,8 @@ export default function Home() {
         <BootScene />
         <Web1995Scene />
         <WildWebScene />
+        <SocialWebScene />
+        <MobileWebScene />
         {placeholderEras.map((era) => (
           <EraPlaceholder key={era.id} era={era} />
         ))}
