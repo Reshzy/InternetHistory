@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #e8e4d9;
+  --signal: #d4782a;
+  --terminal: #6f8f62;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-signal: var(--signal);
+  --color-terminal: var(--terminal);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-museum-mono);
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-museum-mono), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
