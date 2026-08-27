@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-27T02:30:00Z",
+  "title": "Design System: NET//HISTORY",
+  "extensions": {
+    "colorMeta": {
+      "museum-void": { "role": "neutral", "displayName": "Museum Void", "canonical": "#050505" },
+      "museum-paper": { "role": "neutral", "displayName": "Museum Paper", "canonical": "#e8e4d9" },
+      "museum-signal": { "role": "primary", "displayName": "Signal Ember", "canonical": "#d4782a" },
+      "terminal-phosphor": { "role": "secondary", "displayName": "Terminal Phosphor", "canonical": "#6f8f62" },
+      "document-blue": { "role": "tertiary", "displayName": "Document Link Blue", "canonical": "#1a3d8f" },
+      "wild-magenta": { "role": "tertiary", "displayName": "Wild Magenta", "canonical": "#ff4d9a" },
+      "social-steel": { "role": "tertiary", "displayName": "Social Steel", "canonical": "#6b87b8" },
+      "generated-ember": { "role": "primary", "displayName": "Generated Ember", "canonical": "#d4782a" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Era statement", "purpose": "Geist statements from 2018 onward." },
+      "headline": { "displayName": "Era year", "purpose": "Timeline coordinate, not a marketing eyebrow." },
+      "title": { "displayName": "Museum chrome", "purpose": "Nav marks and brand lockup." },
+      "body": { "displayName": "Support copy", "purpose": "Era support lines and future prompt." },
+      "label": { "displayName": "UI label", "purpose": "Mode buttons, skip links, hints." }
+    },
+    "shadows": [
+      { "name": "chrome-none", "value": "none", "purpose": "Museum nav stays flat." },
+      { "name": "device", "value": "0 22px 48px rgba(0, 0, 0, 0.38)", "purpose": "2007 device frame only." },
+      { "name": "crt-phosphor", "value": "0 0 28px rgba(111, 143, 98, 0.18)", "purpose": "Boot CRT glow only." }
+    ],
+    "motion": [
+      { "name": "ease-cinematic", "value": "power2.inOut", "purpose": "GSAP pin morphs and showcase transitions." },
+      { "name": "ease-enter", "value": "power3.out", "purpose": "Arrivals inside a scrubbed timeline." },
+      { "name": "ease-linear", "value": "none", "purpose": "Counters, typing, metric ticks." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "430px" },
+      { "name": "scene-mobile", "value": "767px" },
+      { "name": "nav-compact", "value": "1023px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Museum nav",
+      "kind": "nav",
+      "refersTo": "museum-nav",
+      "description": "Sticky era rail. Recedes on NEXT.",
+      "html": "<header><div class=\"ds-museum-nav\"><a class=\"ds-brand\">NET//HISTORY</a><a class=\"ds-era is-active\">2018</a></div></header>",
+      "css": ".ds-museum-nav { display:flex; gap:12px; align-items:center; background:#050505eb; border-bottom:1px solid rgba(255,255,255,0.1); padding:0.35rem 0.75rem; font-family: ui-monospace, monospace; font-size:11px; letter-spacing:0.14em; color:#e8e4d9;} .ds-brand { color:#e8e4d9; text-decoration:none; letter-spacing:0.32em;} .ds-era { color:#d4d0c4; text-decoration:none;} .ds-era.is-active { color:#e8e4d9;} .ds-era.is-active::before { content:''; display:inline-block; width:6px; height:6px; margin-right:8px; border-radius:50%; background:#d4782a;}"
+    },
+    {
+      "name": "Generated mode",
+      "kind": "button",
+      "refersTo": "generated-mode",
+      "description": "Square ghost control for Place / Orbit / Dissolve.",
+      "html": "<button class=\"ds-mode\" aria-pressed=\"true\">Place</button>",
+      "css": ".ds-mode { min-height:2.75rem; padding:0.45rem 0.9rem; border:1px solid #3a3229; background:transparent; color:#ece7dc; font-family:ui-monospace,monospace; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;} .ds-mode[aria-pressed='true'] { border-color:#d4782a; color:#d4782a;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Interface Is the Exhibit",
+    "overview": "NET//HISTORY is a one-page museum whose visual language mutates with the timeline. Shared chrome is the building; each era is a gallery with its own materials. The product fails if those galleries collapse into one modern system.",
+    "keyCharacteristics": [
+      "Museum chrome stays minimal and recedes",
+      "Two museum faces: IBM Plex Mono and Geist",
+      "Scroll-tied GSAP pins",
+      "Reduced motion keeps final states"
+    ],
+    "rules": [
+      { "name": "The Mutation Rule", "body": "One accent for the building. A new accent for each gallery.", "section": "colors" },
+      { "name": "The Tracking Floor Rule", "body": "Display tracking is -0.04em.", "section": "typography" },
+      { "name": "The Flat Chrome Rule", "body": "Museum nav does not grow glass, blur, or drop shadows.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do let each era keep its own chrome, type, and density.",
+      "Do land era jumps on the pinned scene.",
+      "Do keep reduced-motion final states readable."
+    ],
+    "donts": [
+      "Don't restyle 1995/1999 into modern cards or glass.",
+      "Don't hide 2018 satire or 2023 outputs until the end of a long pin.",
+      "Don't cover story copy with the rail."
+    ]
+  }
+}
