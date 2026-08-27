@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NET//HISTORY
 
-## Getting Started
+An interactive digital museum: 30+ years of the web in one scroll.
 
-First, run the development server:
+The website itself is the exhibit. Visitors move from a CRT boot sequence through early documents, the wild web, social feeds, the mobile shift, platform infinite scroll, design-system sameness, generative interfaces, and a quiet ending.
+
+## Stack
+
+Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP + ScrollTrigger. Deployed as a mostly static client experience on Vercel. No database and no Three.js in v1.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm lint
+pnpm typecheck
+pnpm build
+```
 
-## Learn More
+## Source of truth
 
-To learn more about Next.js, take a look at the following resources:
+Product, motion, and architecture live in `MASTER.md`. Do not flatten era-specific ugliness into a single modern UI.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Optional: set `NEXT_PUBLIC_SITE_URL` (including protocol) so Open Graph URLs resolve to the public domain.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+Production build: `pnpm build`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This repo is Vercel-ready (static `/`, no server, no secrets). The CLI is not logged in on this machine. After `vercel login`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx vercel
+```

@@ -2,6 +2,15 @@
   scroll-margin-top: 0;
 }
 
+.museum-section.is-offscreen,
+.museum-section.is-offscreen * {
+  animation-play-state: paused !important;
+}
+
+.museum-section.is-offscreen .noise-layer {
+  visibility: hidden;
+}
+
 .museum-skips {
   position: absolute;
   left: 1rem;
@@ -2918,6 +2927,7 @@ html.has-custom-cursor textarea {
 
 .future-credits {
   margin: 1.35rem 0 0;
+  max-width: 46ch;
   font-size: 0.75rem;
   letter-spacing: 0.04em;
   color: #d0ccbf;

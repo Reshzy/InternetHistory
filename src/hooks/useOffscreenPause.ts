@@ -1,25 +1,29 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect } from "react";
 
-export function useOffscreenPause(ref: RefObject<HTMLElement | null>) {
+export function useMuseumOffscreenPause() {
   useEffect(() => {
-    const node = ref.current;
-    if (!node) {
+    const nodes = Array.from(
+      document.querySelectorAll<HTMLElement>(".museum-section"),
+    );
+    if (nodes.length === 0) {
       return;
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) {
-          return;
+      (entries) => {
+        for (const entry of entries) {
+          entry.target.classList.toggle("is-offscreen", !entry.isIntersecting);
         }
-        node.classList.toggle("is-offscreen", !entry.isIntersecting);
       },
       { root: null, rootMargin: "100% 0px", threshold: 0 },
     );
 
-    observer.observe(node);
+    for (const node of nodes) {
+      observer.observe(node);
+    }
+
     return () => observer.disconnect();
-  }, [ref]);
+  }, []);
 }

@@ -2,6 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Geist, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import "@/styles/museum.css";
+import {
+  MUSEUM_DESCRIPTION,
+  MUSEUM_TITLE,
+  resolveSiteUrl,
+} from "@/lib/museumMeta";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,10 +19,38 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "700"],
 });
 
+const siteUrl = resolveSiteUrl();
+
 export const metadata: Metadata = {
-  title: "NET//HISTORY — 30 Years of the Web in One Scroll",
-  description:
-    "An interactive journey through the visual evolution of the web, from early documents and personal homepages to feeds, mobile interfaces, AI, and whatever comes next.",
+  metadataBase: new URL(siteUrl),
+  title: MUSEUM_TITLE,
+  description: MUSEUM_DESCRIPTION,
+  applicationName: "NET//HISTORY",
+  authors: [{ name: "NET//HISTORY" }],
+  keywords: [
+    "web history",
+    "internet museum",
+    "GSAP",
+    "scroll experience",
+    "frontend",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "NET//HISTORY",
+    title: MUSEUM_TITLE,
+    description: MUSEUM_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: MUSEUM_TITLE,
+    description: MUSEUM_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport: Viewport = {

@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-delegated: Next.js App Router, React, TypeScript, Tailwind CSS, GSAP + ScrollTrigger, Vercel. Chosen because MASTER.md and CURSOR_PROMPT.md lock this stack; no database, no Three.js in this vertical slice.
+delegated: Next.js App Router, React, TypeScript, Tailwind CSS, GSAP + ScrollTrigger, Vercel. Chosen because MASTER.md locks this stack; no database, no Three.js in v1.
 
 ## Users
 
@@ -26,7 +26,7 @@ The interface mutates with history. Spacing, typography, chrome, texture, color,
 
 ## Operating Context
 
-Source of truth is MASTER.md. CURSOR_PROMPT.md scopes the first implementation run. Development proceeds era-by-era. Primary deployment is Vercel. Impeccable is a design-quality assistant and must not outrank MASTER.md or replace intentional historical ugliness with modern SaaS UI.
+Source of truth is MASTER.md. Development proceeds era-by-era. Primary deployment is Vercel. Impeccable is a design-quality assistant and must not outrank MASTER.md or replace intentional historical ugliness with modern SaaS UI.
 
 ## Capabilities and Constraints
 
@@ -40,7 +40,7 @@ Confirmed for v1:
 - No Three.js until later phases explicitly need it
 - No clone of a specific commercial OS, browser, or social network
 
-Current implementation scope is Phases 0–8: foundation, museum shell, all ten era scenes through the NEXT quiet ending, plus the Phase 8 responsive and accessibility audit.
+Current implementation scope is Phases 0–11: foundation, museum shell, all ten era scenes through the NEXT quiet ending, responsive and accessibility work, the performance pass, the Phase 10 final design pass, and production readiness (metadata, OG/favicon, credits, deploy configuration).
 
 Explicitly not v1: optional audio, WebGL tunnels, CMS, localization, user-submitted memories, analytics, multiplayer, or a complete academic history of the internet.
 

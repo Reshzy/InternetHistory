@@ -162,7 +162,10 @@ export function FutureScene() {
           <span>NET//HISTORY</span>
           <span>1995 — 2026 — ?</span>
         </p>
-        <p className="future-credits">An interactive museum exhibit.</p>
+        <p className="future-credits">
+          An interactive museum exhibit. Typeface: IBM Plex Mono and Geist.
+          No commercial screenshots.
+        </p>
         <a className="future-replay" href="#boot">
           Begin again
         </a>

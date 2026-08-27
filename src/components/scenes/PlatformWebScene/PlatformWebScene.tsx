@@ -211,7 +211,10 @@ export function PlatformWebScene() {
                 duration: 0.36,
                 ease: motion.easeLinear,
                 onUpdate: () => {
-                  item.el.textContent = formatMetric(item.value);
+                  const next = formatMetric(item.value);
+                  if (item.el.textContent !== next) {
+                    item.el.textContent = next;
+                  }
                 },
               },
               0.54,
@@ -225,7 +228,10 @@ export function PlatformWebScene() {
                 duration: 0.36,
                 ease: motion.easeLinear,
                 onUpdate: () => {
-                  item.el.textContent = formatMetric(item.value);
+                  const next = formatMetric(item.value);
+                  if (item.el.textContent !== next) {
+                    item.el.textContent = next;
+                  }
                 },
               },
               0.54,

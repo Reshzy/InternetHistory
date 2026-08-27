@@ -1,6 +1,6 @@
 # NET//HISTORY — MASTER.md
 
-> **Project status:** Phases 0–8 implemented; Phase 9 (performance) next  
+> **Project status:** Phases 0–11 implemented; production build green. Vercel deploy awaits CLI login.  
 > **Project type:** Animation-heavy interactive frontend experience  
 > **Primary deployment:** Vercel  
 > **Primary source of truth:** This file  
@@ -1534,6 +1534,8 @@ Profile:
 
 Optimize based on evidence.
 
+Implemented: off-screen infinite CSS loops pause via `is-offscreen`; Generated-web `gsap.ticker` runs only in orbit mode; hidden tabs sleep the GSAP ticker; metric `textContent` writes skip unchanged strings; `ScrollTrigger.config({ ignoreMobileResize: true })` avoids mobile URL-bar refresh storms. First-load JS stays large because every era remains mounted for pins and nav.
+
 ---
 
 ## PHASE 10 — Final design pass
@@ -1552,6 +1554,8 @@ Suggested sequence:
 ```
 
 Do not blindly accept changes that conflict with the museum concept.
+
+Implemented: dual-agent critique of `src/app/page.tsx`, one normalize/animate/adapt batch (tighter museum chrome, era hash/pin jumps, 2018 Normalizer on mobile, front-loaded 2023 outputs, 2026 shards in-viewport, 2007 pocket-first on small screens, visible NEXT prompt), audit, polish, and DESIGN.md captured from the shipped artifact.
 
 ---
 
@@ -1572,6 +1576,8 @@ Verify:
 
 Deploy to Vercel only after these pass.
 
+Implemented: museum favicon + OG/Twitter images, layout metadata (`metadataBase` from `NEXT_PUBLIC_SITE_URL` or Vercel production URL), NEXT credits/replay, hash/pin jumps wired for first load and rail clicks, off-screen CSS pause, hidden-tab ticker sleep, `ignoreMobileResize`. `pnpm lint`, `pnpm typecheck`, and `pnpm build` pass. Live check at 1440/768/390: all ten rail jumps land on scene copy, `#generated-web` and `#next` first-load hashes land, no page console errors, no phone overflow, reduced-motion boot lines are visible. Vercel CLI is installed but logged out — deploy with `npx vercel` after `vercel login`.
+
 ---
 
 # 29. TESTING CHECKLIST
@@ -1580,58 +1586,58 @@ Before calling the project finished:
 
 ## Functional
 
-- [ ] All era navigation works.
-- [ ] Every scene can be reached.
-- [ ] Reloading at normal page start works.
-- [ ] No hydration warnings.
-- [ ] No broken assets.
-- [ ] No critical console errors.
+- [x] All era navigation works.
+- [x] Every scene can be reached.
+- [x] Reloading at normal page start works.
+- [x] No hydration warnings.
+- [x] No broken assets.
+- [x] No critical console errors.
 
 ## Motion
 
-- [ ] GSAP instances clean up correctly.
-- [ ] No major scroll jumps.
-- [ ] No long dead scroll zones.
-- [ ] Pins release correctly.
+- [x] GSAP instances clean up correctly.
+- [x] No major scroll jumps.
+- [x] No long dead scroll zones.
+- [x] Pins release correctly.
 - [ ] Animations remain coherent when scrolling quickly.
 - [ ] Animations remain coherent when scrolling backward.
-- [ ] Reduced-motion experience is complete.
+- [x] Reduced-motion experience is complete.
 
 ## Responsive
 
-- [ ] 1440px checked.
+- [x] 1440px checked.
 - [ ] 1280px checked.
 - [ ] 1024px checked.
-- [ ] 768px checked.
+- [x] 768px checked.
 - [ ] 430px checked.
-- [ ] 390px checked.
+- [x] 390px checked.
 - [ ] 360px checked.
 
 ## Accessibility
 
-- [ ] Keyboard navigation works.
-- [ ] Focus states are visible.
-- [ ] Text contrast is acceptable.
-- [ ] Meaningful images have alt text.
-- [ ] Decorative visuals are marked appropriately.
-- [ ] No essential hover-only content.
-- [ ] Reduced motion is respected.
+- [x] Keyboard navigation works.
+- [x] Focus states are visible.
+- [x] Text contrast is acceptable.
+- [x] Meaningful images have alt text.
+- [x] Decorative visuals are marked appropriately.
+- [x] No essential hover-only content.
+- [x] Reduced motion is respected.
 
 ## Performance
 
-- [ ] Images compressed.
-- [ ] Fonts optimized.
+- [x] Images compressed.
+- [x] Fonts optimized.
 - [ ] Heavy code lazy-loaded where useful.
-- [ ] No unnecessary continuous animation loops.
-- [ ] No React state updates per animation frame.
+- [x] No unnecessary continuous animation loops.
+- [x] No React state updates per animation frame.
 - [ ] Mobile remains reasonably smooth.
 
 ## Deployment
 
-- [ ] Production build succeeds.
+- [x] Production build succeeds.
 - [ ] Vercel preview succeeds.
-- [ ] Metadata is correct.
-- [ ] No secrets are exposed.
+- [x] Metadata is correct.
+- [x] No secrets are exposed.
 
 ---
 

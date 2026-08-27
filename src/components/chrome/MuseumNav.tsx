@@ -4,20 +4,20 @@ import { useEffect } from "react";
 import { ReducedMotionNotice } from "@/components/chrome/ReducedMotionNotice";
 import { eraIds, eras } from "@/lib/eras";
 import { useActiveEra } from "@/hooks/useActiveEra";
+import { useMuseumOffscreenPause } from "@/hooks/useOffscreenPause";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { bindHashEraScroll } from "@/lib/eraScroll";
 import type { Era } from "@/types/museum";
 
 function EraMark({ era, isActive }: { era: Era; isActive: boolean }) {
-  const inactive =
-    era.status === "placeholder" ? "text-[#cfcbbf]" : "text-[#d4d0c4]";
-
   return (
     <a
       href={`#${era.id}`}
       data-era-mark={era.id}
-      data-era-status={era.status}
       className={`group relative inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 px-2 py-2 font-mono text-[11px] tracking-[0.14em] no-underline transition-colors lg:min-h-0 lg:min-w-0 lg:px-1 lg:py-1 ${
-        isActive ? "text-[#e8e4d9]" : `${inactive} hover:text-[#e8e4d9] focus-visible:text-[#e8e4d9]`
+        isActive
+          ? "text-[#e8e4d9]"
+          : "text-[#d4d0c4] hover:text-[#e8e4d9] focus-visible:text-[#e8e4d9]"
       }`}
       aria-current={isActive ? "true" : undefined}
     >
@@ -30,10 +30,7 @@ function EraMark({ era, isActive }: { era: Era; isActive: boolean }) {
         aria-hidden="true"
       />
       <span>{era.year}</span>
-      <span className="sr-only">
-        {era.title}
-        {era.status === "placeholder" ? " — gallery closed" : ""}
-      </span>
+      <span className="sr-only">{era.title}</span>
     </a>
   );
 }
@@ -42,6 +39,9 @@ export function MuseumNav() {
   const activeId = useActiveEra(eraIds, "boot");
   const activeEra = eras.find((era) => era.id === activeId) ?? eras[0];
   const prefersReducedMotion = usePrefersReducedMotion();
+  useMuseumOffscreenPause();
+
+  useEffect(() => bindHashEraScroll(), []);
 
   useEffect(() => {
     const marks = document.querySelectorAll(`[data-era-mark="${activeId}"]`);

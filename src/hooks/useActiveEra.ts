@@ -58,13 +58,11 @@ export function useActiveEra(ids: readonly EraId[], fallback: EraId) {
       }
     };
 
-    ScrollTrigger.addEventListener("update", measure);
     ScrollTrigger.addEventListener("refresh", measure);
     window.addEventListener("scroll", measure, { passive: true });
     measure();
 
     return () => {
-      ScrollTrigger.removeEventListener("update", measure);
       ScrollTrigger.removeEventListener("refresh", measure);
       window.removeEventListener("scroll", measure);
     };

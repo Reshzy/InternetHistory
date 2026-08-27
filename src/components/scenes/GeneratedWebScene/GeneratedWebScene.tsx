@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { usePointerCapabilities } from "@/hooks/usePointerCapabilities";
 import { getEra } from "@/lib/eras";
 import { FUTURE_MODES, GENERATED_SHARDS, type FutureModeId } from "@/lib/futureModes";
@@ -30,7 +30,10 @@ export function GeneratedWebScene() {
   const { isFine, isCoarse, canHover } = usePointerCapabilities();
   const canAttract = isFine && canHover && !isCoarse;
   const canAttractRef = useRef(canAttract);
-  canAttractRef.current = canAttract;
+
+  useEffect(() => {
+    canAttractRef.current = canAttract;
+  }, [canAttract]);
 
   useGSAP(
     (_context, contextSafe) => {
@@ -123,12 +126,33 @@ export function GeneratedWebScene() {
             });
           };
 
+          const tick = () => {
+            if (mode !== "orbit") {
+              return;
+            }
+            angle += isMobile ? 0.04 : 0.016;
+            shards.forEach((shard, index) => {
+              if (isMobile) {
+                gsap.set(shard, {
+                  scale: 1 + Math.sin(angle * 1.4 + index) * 0.035,
+                });
+                return;
+              }
+              const radius = 26 + index * 11;
+              const theta = angle + (index * Math.PI * 2) / shards.length;
+              xTo[index](pointer.x * 0.28 + Math.cos(theta) * radius);
+              yTo[index](pointer.y * 0.28 + Math.sin(theta) * radius);
+            });
+          };
+
           motionApply = (next) => {
-            if (next === "place") {
+            if (next === "orbit") {
+              gsap.ticker.add(tick);
               settle();
               return;
             }
-            if (next === "orbit") {
+            gsap.ticker.remove(tick);
+            if (next === "place") {
               settle();
               return;
             }
@@ -148,25 +172,6 @@ export function GeneratedWebScene() {
               );
               xTo[index](scatterX);
               yTo[index](scatterY);
-            });
-          };
-
-          const tick = () => {
-            if (mode !== "orbit") {
-              return;
-            }
-            angle += isMobile ? 0.04 : 0.016;
-            shards.forEach((shard, index) => {
-              if (isMobile) {
-                gsap.set(shard, {
-                  scale: 1 + Math.sin(angle * 1.4 + index) * 0.035,
-                });
-                return;
-              }
-              const radius = 26 + index * 11;
-              const theta = angle + (index * Math.PI * 2) / shards.length;
-              xTo[index](pointer.x * 0.28 + Math.cos(theta) * radius);
-              yTo[index](pointer.y * 0.28 + Math.sin(theta) * radius);
             });
           };
 
@@ -197,8 +202,6 @@ export function GeneratedWebScene() {
           if (!isMobile) {
             stage.addEventListener("pointermove", onPointerMove);
           }
-
-          gsap.ticker.add(tick);
 
           const timeline = gsap.timeline({
             defaults: { ease: motion.easeEnter },
