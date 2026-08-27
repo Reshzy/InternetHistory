@@ -1,5 +1,5 @@
 .museum-section {
-  scroll-margin-top: 4.75rem;
+  scroll-margin-top: 0;
 }
 
 .museum-skip {
@@ -2669,5 +2669,250 @@ html.has-custom-cursor button {
 
   .ai-output [data-gen-b] {
     opacity: 1;
+  }
+}
+
+.future-scene {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  background: #050505;
+  color: #8fba6a;
+  font-family: var(--font-museum-mono), ui-monospace, monospace;
+}
+
+.future-pin {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  padding: 5.4rem 1.5rem 2.25rem;
+}
+
+.future-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  z-index: 0;
+}
+
+.future-glyphs {
+  position: absolute;
+  inset: 5.4rem 0 6.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.future-glyph {
+  position: absolute;
+  font-size: clamp(1.15rem, 2.8vw, 2.1rem);
+  line-height: 1;
+  color: #6f8f62;
+  opacity: 0.11;
+  animation: future-glyph-in 0.7s ease-out both;
+}
+
+.future-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 22rem;
+}
+
+.future-year {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  color: #6f8f62;
+}
+
+.future-copy h2 {
+  margin: 1.1rem 0 0;
+  max-width: 14ch;
+  font-size: clamp(1.7rem, 4.1vw, 2.85rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #cfe3c0;
+}
+
+.future-question {
+  margin: 1.15rem 0 0;
+  max-width: 22ch;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  line-height: 1.45;
+  color: #8fba6a;
+}
+
+.future-answer-line {
+  display: none;
+  margin: 1rem 0 0;
+  min-height: 1.4em;
+  max-width: 36ch;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #cfe3c0;
+}
+
+.future-answer-line[data-has-answer="false"] {
+  min-height: 0;
+}
+
+.future-prompt {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: min(100%, 36rem);
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(111, 143, 98, 0.18);
+}
+
+.future-prompt-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.future-prompt-mark {
+  flex: none;
+  color: #6f8f62;
+}
+
+.future-field {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #cfe3c0;
+  caret-color: #8fba6a;
+  font: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  outline: none;
+}
+
+.future-field:focus-visible {
+  outline: none;
+}
+
+.future-prompt:focus-within {
+  border-top-color: rgba(143, 186, 106, 0.55);
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+
+.future-prompt:focus-within .future-idle-cursor,
+.future-prompt:has(.future-field:not(:placeholder-shown)) .future-idle-cursor {
+  visibility: hidden;
+}
+
+.future-rest {
+  padding: 3.25rem 1.5rem 4.5rem;
+  border-top: 1px solid rgba(232, 228, 217, 0.08);
+  color: #e8e4d9;
+}
+
+.future-signature {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: #8fba6a;
+}
+
+.future-credits {
+  margin: 1.35rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: rgba(232, 228, 217, 0.62);
+}
+
+.future-replay {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 0.15rem;
+  color: rgba(232, 228, 217, 0.78);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+}
+
+.future-replay:hover,
+.future-replay:focus-visible {
+  color: #8fba6a;
+}
+
+@keyframes future-glyph-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.11;
+  }
+}
+
+@media (max-width: 767px) {
+  .future-pin {
+    padding: 7.25rem 1rem 1.6rem;
+  }
+
+  .future-glyphs {
+    display: none;
+  }
+
+  .future-copy {
+    max-width: none;
+  }
+
+  .future-copy h2 {
+    font-size: 1.65rem;
+  }
+
+  .future-question {
+    font-size: 0.92rem;
+    max-width: 28ch;
+  }
+
+  .future-answer-line {
+    display: block;
+  }
+
+  .future-rest {
+    padding: 2.4rem 1rem 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .future-glyphs {
+    display: none;
+  }
+
+  .future-answer-line {
+    display: block;
+  }
+
+  .future-glyph,
+  .future-idle-cursor {
+    animation: none;
   }
 }

@@ -105,7 +105,7 @@ export const eras: Era[] = [
     theme: "next",
     statement: "THE WEB HAS NEVER STOPPED CHANGING.",
     support: "WHAT SHOULD IT BECOME NEXT?",
-    status: "placeholder",
+    status: "built",
   },
 ];
 

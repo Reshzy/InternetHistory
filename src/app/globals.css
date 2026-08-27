@@ -24,6 +24,12 @@ html {
   scroll-padding-top: 4.75rem;
 }
 
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 7.25rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

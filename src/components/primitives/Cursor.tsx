@@ -41,7 +41,7 @@ export function Cursor() {
         if (!(target instanceof Element)) {
           return;
         }
-        const interactive = target.closest("a, button");
+        const interactive = target.closest("a, button, input, textarea");
         const generated = target.closest('[data-cursor-scene="generated"]');
         gsap.to(ring, {
           scale: interactive ? 1.55 : generated ? 1.35 : 1,

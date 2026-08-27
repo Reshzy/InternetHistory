@@ -2,7 +2,7 @@ import { MuseumNav } from "@/components/chrome/MuseumNav";
 import { Cursor } from "@/components/primitives/Cursor";
 import { AIWebScene } from "@/components/scenes/AIWebScene";
 import { BootScene } from "@/components/scenes/BootScene";
-import { EraPlaceholder } from "@/components/scenes/EraPlaceholder";
+import { FutureScene } from "@/components/scenes/FutureScene";
 import { GeneratedWebScene } from "@/components/scenes/GeneratedWebScene";
 import { MobileWebScene } from "@/components/scenes/MobileWebScene";
 import { ModernWebScene } from "@/components/scenes/ModernWebScene";
@@ -10,9 +10,6 @@ import { PlatformWebScene } from "@/components/scenes/PlatformWebScene";
 import { SocialWebScene } from "@/components/scenes/SocialWebScene";
 import { Web1995Scene } from "@/components/scenes/Web1995Scene";
 import { WildWebScene } from "@/components/scenes/WildWebScene";
-import { eras } from "@/lib/eras";
-
-const placeholderEras = eras.filter((era) => era.status === "placeholder");
 
 export default function Home() {
   return (
@@ -35,9 +32,7 @@ export default function Home() {
         <ModernWebScene />
         <AIWebScene />
         <GeneratedWebScene />
-        {placeholderEras.map((era) => (
-          <EraPlaceholder key={era.id} era={era} />
-        ))}
+        <FutureScene />
       </main>
     </>
   );
