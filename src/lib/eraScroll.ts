@@ -1,8 +1,14 @@
 "use client";
 
+import { eraIds } from "@/lib/eras";
 import { ScrollTrigger } from "@/lib/gsap";
 
 const NATIVE_HASH_IDS = new Set(["museum-nav", "museum-main"]);
+const ERA_HASH_IDS = new Set<string>(eraIds);
+
+function isEraHash(id: string) {
+  return ERA_HASH_IDS.has(id);
+}
 
 export function triggerSectionId(target: Element) {
   if (target.classList.contains("museum-section") && target.id) {
@@ -88,7 +94,7 @@ export function bindHashEraScroll() {
 
   const fromHash = (allowFallback = false) => {
     const id = window.location.hash.replace(/^#/, "");
-    if (!id || NATIVE_HASH_IDS.has(id)) {
+    if (!id || NATIVE_HASH_IDS.has(id) || !isEraHash(id)) {
       return;
     }
     scrollToEra(id, allowFallback);
@@ -122,9 +128,12 @@ export function bindHashEraScroll() {
     if (!(anchor instanceof HTMLAnchorElement)) {
       return;
     }
+    if (anchor.hasAttribute("data-web-link")) {
+      return;
+    }
 
     const id = anchor.hash.replace(/^#/, "");
-    if (!id || NATIVE_HASH_IDS.has(id)) {
+    if (!id || NATIVE_HASH_IDS.has(id) || !isEraHash(id)) {
       return;
     }
 

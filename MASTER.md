@@ -411,6 +411,14 @@ Scrolling:
 3. links multiply,
 4. the camera begins moving through connected pages.
 
+Clicking a hyperlink travels inside the pinned frame. It does not jump the museum timeline.
+
+- **documents** opens `about.htm`
+- **doors** opens `links.htm`
+- **somewhere** opens `notes.htm`
+
+The window title and location update, the matching connective line lights, and that floating page comes forward. Back (chrome or `← INDEX.HTM`) returns to `INDEX.HTM`. Hash rail / webring links still only jump eras.
+
 ### Motion concept
 
 Hyperlinks become literal connective lines between floating documents.

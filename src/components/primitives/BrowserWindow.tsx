@@ -1,8 +1,13 @@
+import type { ReactNode } from "react";
+
 type BrowserWindowProps = {
   title: string;
   url: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
+  status?: string;
+  onBack?: () => void;
+  backDisabled?: boolean;
 };
 
 export function BrowserWindow({
@@ -10,6 +15,9 @@ export function BrowserWindow({
   url,
   children,
   className,
+  status = "Document: Done",
+  onBack,
+  backDisabled = true,
 }: BrowserWindowProps) {
   return (
     <article className={["browser", className].filter(Boolean).join(" ")}>
@@ -22,12 +30,24 @@ export function BrowserWindow({
         <p className="browser-title">{title}</p>
       </header>
       <div className="browser-toolbar">
+        {onBack ? (
+          <button
+            type="button"
+            className="browser-back"
+            onClick={onBack}
+            disabled={backDisabled}
+            aria-label="Back to INDEX.HTM"
+          >
+            Back
+          </button>
+        ) : null}
         <span className="browser-nav" aria-hidden="true">
           Location
         </span>
         <span className="browser-url">{url}</span>
       </div>
       <div className="browser-page">{children}</div>
+      <p className="browser-status">{status}</p>
     </article>
   );
 }

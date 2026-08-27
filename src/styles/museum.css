@@ -381,12 +381,34 @@ html.has-custom-cursor textarea {
   font-size: 0.65rem;
 }
 
+.browser-back,
 .browser-nav {
   border: 1px solid;
   border-color: #f7f7f7 #555 #555 #f7f7f7;
   background: #d4d4d4;
   padding: 0.12rem 0.4rem;
   color: #222;
+}
+
+.browser-back {
+  font: inherit;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.browser-back:disabled {
+  color: #7a7a7a;
+  cursor: default;
+}
+
+.browser-back:not(:disabled):hover,
+.browser-back:not(:disabled):focus-visible {
+  background: #e4e4e4;
+}
+
+.browser-back:focus-visible {
+  outline: 2px solid #0000ee;
+  outline-offset: 1px;
 }
 
 .browser-url {
@@ -403,7 +425,7 @@ html.has-custom-cursor textarea {
 }
 
 .browser-page {
-  margin: 0 0.35rem 0.35rem;
+  margin: 0 0.35rem 0.2rem;
   min-height: 14rem;
   background: #fff;
   color: #111;
@@ -411,6 +433,34 @@ html.has-custom-cursor textarea {
   border-color: #555 #f2f2f2 #f2f2f2 #555;
   padding: 1rem 1.05rem 1.15rem;
   font-family: Times, "Times New Roman", serif;
+}
+
+.browser-page-view.is-arriving:not([hidden]) {
+  animation: doc-arrive 0.2s ease-out;
+}
+
+.browser-page h2:focus {
+  outline: none;
+}
+
+.browser-page h2:focus-visible {
+  outline: 2px solid #0000ee;
+  outline-offset: 2px;
+}
+
+.browser-status {
+  margin: 0 0.35rem 0.28rem;
+  min-height: 1.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 1px solid;
+  border-color: #555 #f2f2f2 #f2f2f2 #555;
+  background: #d4d4d4;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  color: #222;
 }
 
 .browser-page h2,
@@ -438,14 +488,21 @@ html.has-custom-cursor textarea {
   max-width: 42rem;
 }
 
+.browser-page .browser-hanging {
+  padding-left: 5em;
+  text-indent: -5em;
+}
+
 .browser-page a,
 .doc-card a {
   color: #0000ee;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .browser-page a:visited,
-.doc-card a:visited {
+.doc-card a:visited,
+.browser-page a.is-visited {
   color: #551a8b;
 }
 
@@ -456,6 +513,60 @@ html.has-custom-cursor textarea {
   box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.22);
   padding: 0.7rem 0.75rem 0.8rem;
   font-family: Times, "Times New Roman", serif;
+}
+
+.doc-card [data-doc-emphasis] {
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+}
+
+.doc-slot:has(.doc-card.is-destination) {
+  z-index: 3;
+}
+
+.doc-scene:has([data-doc-target="about"]:hover) [data-doc-line="about"],
+.doc-scene:has([data-doc-target="about"]:focus-visible) [data-doc-line="about"],
+.doc-scene:has([data-doc-target="links"]:hover) [data-doc-line="links"],
+.doc-scene:has([data-doc-target="links"]:focus-visible) [data-doc-line="links"],
+.doc-scene:has([data-doc-target="notes"]:hover) [data-doc-line="notes"],
+.doc-scene:has([data-doc-target="notes"]:focus-visible) [data-doc-line="notes"] {
+  stroke: #5b8eef;
+  stroke-width: 2;
+}
+
+.doc-scene:has([data-doc-target="about"]:hover) .doc-card[data-doc-id="about"],
+.doc-scene:has([data-doc-target="about"]:focus-visible) .doc-card[data-doc-id="about"],
+.doc-scene:has([data-doc-target="links"]:hover) .doc-card[data-doc-id="links"],
+.doc-scene:has([data-doc-target="links"]:focus-visible) .doc-card[data-doc-id="links"],
+.doc-scene:has([data-doc-target="notes"]:hover) .doc-card[data-doc-id="notes"],
+.doc-scene:has([data-doc-target="notes"]:focus-visible) .doc-card[data-doc-id="notes"] {
+  outline: 1px solid #0000ee;
+  outline-offset: 1px;
+}
+
+.doc-card.is-destination {
+  outline: 2px solid #0000ee;
+  outline-offset: 2px;
+  box-shadow: 4px 6px 0 rgba(0, 0, 51, 0.28);
+}
+
+.doc-card.is-destination [data-doc-emphasis] {
+  transform: scale(1.06);
+}
+
+.doc-lines line.is-lit {
+  stroke: #0000ee;
+  stroke-width: 2.5;
+}
+
+@keyframes doc-arrive {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .doc-card h3 {
@@ -529,6 +640,15 @@ html.has-custom-cursor textarea {
 
   .doc-scene {
     background: #141618;
+  }
+
+  .browser-page-view.is-arriving:not([hidden]) {
+    animation: none;
+  }
+
+  .doc-card [data-doc-emphasis] {
+    transition: none;
+    transform: none;
   }
 }
 
