@@ -3,6 +3,8 @@ import { Cursor } from "@/components/primitives/Cursor";
 import { BootScene } from "@/components/scenes/BootScene";
 import { EraPlaceholder } from "@/components/scenes/EraPlaceholder";
 import { MobileWebScene } from "@/components/scenes/MobileWebScene";
+import { ModernWebScene } from "@/components/scenes/ModernWebScene";
+import { PlatformWebScene } from "@/components/scenes/PlatformWebScene";
 import { SocialWebScene } from "@/components/scenes/SocialWebScene";
 import { Web1995Scene } from "@/components/scenes/Web1995Scene";
 import { WildWebScene } from "@/components/scenes/WildWebScene";
@@ -27,6 +29,8 @@ export default function Home() {
         <WildWebScene />
         <SocialWebScene />
         <MobileWebScene />
+        <PlatformWebScene />
+        <ModernWebScene />
         {placeholderEras.map((era) => (
           <EraPlaceholder key={era.id} era={era} />
         ))}

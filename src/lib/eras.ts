@@ -61,7 +61,9 @@ export const eras: Era[] = [
     shortTitle: "Platform",
     theme: "platform",
     statement: "THE INTERNET LEARNED TO KEEP YOU SCROLLING.",
-    status: "placeholder",
+    support:
+      "Recommendation replaced intention. The next thing arrived before you asked for it.",
+    status: "built",
   },
   {
     id: "modern-web",
@@ -70,7 +72,9 @@ export const eras: Era[] = [
     shortTitle: "Polished",
     theme: "polished",
     statement: "EVERYTHING GOT BETTER. EVERYTHING STARTED LOOKING THE SAME.",
-    status: "placeholder",
+    support:
+      "Spacing got better. Type got better. Every product started speaking the same dialect.",
+    status: "built",
   },
   {
     id: "ai-web",
