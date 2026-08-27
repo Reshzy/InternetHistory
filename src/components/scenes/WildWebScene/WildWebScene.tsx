@@ -236,9 +236,13 @@ export function WildWebScene() {
                   <p className="wild-support">{era.support}</p>
                 ) : null}
                 <p className="wild-webring">
-                  <a href="#document-web">prev</a>
+                  <a href="#document-web" aria-label="Previous era: The Document Web">
+                    prev
+                  </a>
                   <span aria-hidden="true"> · webring · </span>
-                  <a href="#social-web">next</a>
+                  <a href="#social-web" aria-label="Next era: The Social Web">
+                    next
+                  </a>
                 </p>
                 <p className="wild-hits">
                   you are visitor

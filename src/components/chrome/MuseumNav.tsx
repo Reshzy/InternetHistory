@@ -1,27 +1,31 @@
 "use client";
 
 import { useEffect } from "react";
+import { ReducedMotionNotice } from "@/components/chrome/ReducedMotionNotice";
 import { eraIds, eras } from "@/lib/eras";
 import { useActiveEra } from "@/hooks/useActiveEra";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import type { Era } from "@/types/museum";
 
 function EraMark({ era, isActive }: { era: Era; isActive: boolean }) {
-  const inactive = era.status === "placeholder" ? "text-[#e8e4d9]/55" : "text-[#e8e4d9]/70";
+  const inactive =
+    era.status === "placeholder" ? "text-[#cfcbbf]" : "text-[#d4d0c4]";
 
   return (
     <a
       href={`#${era.id}`}
       data-era-mark={era.id}
       data-era-status={era.status}
-      className={`group relative inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 px-2 py-2 font-mono text-[11px] tracking-[0.14em] no-underline transition-colors md:min-h-0 md:min-w-0 md:px-1 md:py-1 ${
-        isActive ? "text-[#e8e4d9]" : `${inactive} hover:text-[#e8e4d9]/90`
+      className={`group relative inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 px-2 py-2 font-mono text-[11px] tracking-[0.14em] no-underline transition-colors lg:min-h-0 lg:min-w-0 lg:px-1 lg:py-1 ${
+        isActive ? "text-[#e8e4d9]" : `${inactive} hover:text-[#e8e4d9] focus-visible:text-[#e8e4d9]`
       }`}
       aria-current={isActive ? "true" : undefined}
     >
       <span
         className={`h-1.5 w-1.5 rounded-full ${
-          isActive ? "bg-[var(--signal)]" : "bg-[#e8e4d9]/30 group-hover:bg-[#e8e4d9]/55"
+          isActive
+            ? "bg-[var(--signal)]"
+            : "bg-[#e8e4d9]/45 group-hover:bg-[#e8e4d9]/80 group-focus-visible:bg-[#e8e4d9]/80"
         }`}
         aria-hidden="true"
       />
@@ -64,26 +68,28 @@ export function MuseumNav() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-40">
-      <div className="pointer-events-auto border-b border-white/10 bg-[#050505]/92 px-3 py-2 md:px-5">
+      <div className="museum-chrome pointer-events-auto border-b border-white/10 bg-[#050505]/92">
         <div className="flex items-center justify-between gap-3">
           <a
             href="#boot"
-            className="inline-flex min-h-11 items-center font-mono text-[11px] tracking-[0.32em] text-[#e8e4d9] no-underline md:min-h-0"
+            className="inline-flex min-h-11 items-center font-mono text-[11px] tracking-[0.32em] text-[#e8e4d9] no-underline lg:min-h-0"
           >
             NET//HISTORY
           </a>
-          <p className="min-w-0 truncate font-mono text-[11px] tracking-[0.12em] text-[#e8e4d9]/70 md:hidden">
+          <p className="min-w-0 truncate font-mono text-[11px] tracking-[0.12em] text-[#d4d0c4] lg:hidden">
             <span className="text-[var(--signal)]">{activeEra.year}</span>
-            <span className="mx-2 text-[#e8e4d9]/25">/</span>
+            <span className="mx-2 text-[#e8e4d9]/40">/</span>
             <span>{activeEra.shortTitle}</span>
           </p>
         </div>
 
         <nav
+          id="museum-nav"
+          tabIndex={-1}
           aria-label="Museum timeline"
-          className="era-rail mt-1 flex items-center gap-1 overflow-x-auto md:mt-2 md:gap-0"
+          className="era-rail mt-1 flex items-center gap-1 overflow-x-auto lg:mt-2 lg:gap-0"
         >
-          <div className="hidden min-w-0 flex-1 items-center md:flex">
+          <div className="hidden min-w-0 flex-1 items-center lg:flex">
             {eras.map((era, index) => (
               <span key={era.id} className="flex min-w-0 items-center">
                 {index > 0 ? (
@@ -96,12 +102,13 @@ export function MuseumNav() {
               </span>
             ))}
           </div>
-          <div className="flex md:hidden">
+          <div className="flex lg:hidden">
             {eras.map((era) => (
               <EraMark key={era.id} era={era} isActive={era.id === activeId} />
             ))}
           </div>
         </nav>
+        <ReducedMotionNotice />
       </div>
     </header>
   );

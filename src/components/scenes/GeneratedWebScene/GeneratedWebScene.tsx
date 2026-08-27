@@ -268,7 +268,12 @@ export function GeneratedWebScene() {
           {era.support ? (
             <p className="generated-support">{era.support}</p>
           ) : null}
-          <p className="generated-hint" data-mode-hint aria-live="polite">
+          <p
+            id="generated-mode-hint"
+            className="generated-hint"
+            data-mode-hint
+            aria-live="polite"
+          >
             {FUTURE_MODES[0].hint}
           </p>
         </div>
@@ -307,6 +312,7 @@ export function GeneratedWebScene() {
           className="generated-modes"
           role="group"
           aria-label="Future modes"
+          aria-describedby="generated-mode-hint"
         >
           {FUTURE_MODES.map((mode, index) => (
             <button

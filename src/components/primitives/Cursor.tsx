@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePointerCapabilities } from "@/hooks/usePointerCapabilities";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 export function Cursor() {
   const { isFine, isCoarse, canHover } = usePointerCapabilities();
-  const enabled = isFine && canHover && !isCoarse;
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const enabled = isFine && canHover && !isCoarse && !prefersReducedMotion;
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);

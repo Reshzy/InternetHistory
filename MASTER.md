@@ -1,6 +1,6 @@
 # NET//HISTORY — MASTER.md
 
-> **Project status:** Planning / foundation  
+> **Project status:** Phases 0–8 implemented; Phase 9 (performance) next  
 > **Project type:** Animation-heavy interactive frontend experience  
 > **Primary deployment:** Vercel  
 > **Primary source of truth:** This file  
@@ -1515,6 +1515,8 @@ Do not treat this as "make desktop smaller."
 Audit every scene.
 
 Use Impeccable `/adapt` and `/audit` where useful.
+
+Implemented in code: skip links, custom-cursor reduced-motion and text-caret gating, Future ending accessible answer, focus/hover parity, contrast on museum chrome, webring labels, reduced-motion notice, Generated reduced-motion CSS fallback, tablet (768–1023) and 360–430 choreography, nav clearance tokens, and notched-phone safe areas. Confirm the §29 viewport list in a live browser before treating visual QA as closed.
 
 ---
 

@@ -5,6 +5,8 @@
   --foreground: #e8e4d9;
   --signal: #d4782a;
   --terminal: #6f8f62;
+  --museum-nav-clearance: calc(4.75rem + env(safe-area-inset-top, 0px));
+  --museum-copy-pad: calc(var(--museum-nav-clearance) + 0.65rem);
 }
 
 @theme inline {
@@ -21,18 +23,28 @@ html {
   color: var(--foreground);
   color-scheme: dark;
   scroll-behavior: smooth;
-  scroll-padding-top: 4.75rem;
+  scroll-padding-top: var(--museum-nav-clearance);
 }
 
-@media (max-width: 767px) {
-  html {
-    scroll-padding-top: 7.25rem;
+@media (max-width: 1023px) {
+  :root {
+    --museum-nav-clearance: calc(7.25rem + env(safe-area-inset-top, 0px));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --museum-nav-clearance: calc(6.25rem + env(safe-area-inset-top, 0px));
+  }
+
   html {
     scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 1023px) {
+  :root {
+    --museum-nav-clearance: calc(8.75rem + env(safe-area-inset-top, 0px));
   }
 }
 

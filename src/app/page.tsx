@@ -14,15 +14,20 @@ import { WildWebScene } from "@/components/scenes/WildWebScene";
 export default function Home() {
   return (
     <>
-      <a href="#document-web" className="museum-skip">
-        Skip to 1995
-      </a>
+      <div className="museum-skips">
+        <a href="#museum-nav" className="museum-skip">
+          Skip to timeline
+        </a>
+        <a href="#document-web" className="museum-skip">
+          Skip boot sequence
+        </a>
+      </div>
       <h1 className="sr-only">
         NET//HISTORY — 30 years of the web in one scroll
       </h1>
       <Cursor />
       <MuseumNav />
-      <main>
+      <main id="museum-main">
         <BootScene />
         <Web1995Scene />
         <WildWebScene />

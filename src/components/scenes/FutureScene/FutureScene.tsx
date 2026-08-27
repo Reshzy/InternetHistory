@@ -123,19 +123,22 @@ export function FutureScene() {
               {era.support}
             </p>
           ) : null}
-          <p
+          <output
+            htmlFor="future-answer"
             className="future-answer-line"
             data-has-answer={answer.length > 0 ? "true" : "false"}
-            aria-hidden="true"
           >
             {answer}
-          </p>
+          </output>
         </div>
 
         <form className="future-prompt" data-future-prompt onSubmit={onSubmit}>
           <label htmlFor="future-answer" className="future-prompt-label">
             What should the web become next?
           </label>
+          <p id="future-limit" className="sr-only">
+            Up to {ANSWER_LIMIT} characters.
+          </p>
           <span className="future-prompt-mark" aria-hidden="true">
             &gt;
           </span>
@@ -149,6 +152,7 @@ export function FutureScene() {
             autoCorrect="off"
             spellCheck={false}
             placeholder=" "
+            aria-describedby="future-limit"
             onChange={(event) => setAnswer(event.target.value.slice(0, ANSWER_LIMIT))}
           />
         </form>

@@ -112,7 +112,7 @@ export function BootScene() {
             <h2 id="boot-heading" className="sr-only">
               {era.year} — {era.title}
             </h2>
-            <p className="mb-6 font-mono text-[11px] tracking-[0.28em] text-[#8fba6a]/80">
+            <p className="mb-6 font-mono text-[11px] tracking-[0.28em] text-[#8fba6a]">
               {era.year}
             </p>
             <pre className="font-mono text-sm leading-7 md:text-[0.95rem]">
