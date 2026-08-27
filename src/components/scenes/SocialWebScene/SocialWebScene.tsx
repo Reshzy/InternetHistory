@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { getEra } from "@/lib/eras";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { motion } from "@/lib/motion";
@@ -42,6 +43,117 @@ function layoutLines(
     line.setAttribute("stroke-dasharray", String(length));
     line.dataset.length = String(length);
   });
+}
+
+const JERKIN_AVATAR =
+  "https://api.dicebear.com/10.x/micah/svg?seed=Jerkin+Jenkins&scale=1.2&backgroundColor=f4f1ea&size=64";
+
+type FeedItem = (typeof SOCIAL_FEED)[number];
+
+function SocialFeedPost({
+  item,
+  className,
+  ariaHidden,
+}: {
+  item: FeedItem;
+  className?: string;
+  ariaHidden?: boolean;
+}) {
+  return (
+    <div
+      className={["social-post", className].filter(Boolean).join(" ")}
+      aria-hidden={ariaHidden || undefined}
+    >
+      <span
+        className="social-avatar social-avatar-sm"
+        style={{ background: item.color }}
+      >
+        {item.initial}
+      </span>
+      <p>
+        <strong>{item.name}</strong> {item.text}
+      </p>
+    </div>
+  );
+}
+
+function SukiEggPost({ item }: { item: FeedItem }) {
+  const pairRef = useRef<HTMLDivElement>(null);
+  const eggRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useGSAP(
+    (_context, contextSafe) => {
+      const pair = pairRef.current;
+      const egg = eggRef.current;
+      if (!pair || !egg || !contextSafe) {
+        return;
+      }
+
+      gsap.set(egg, {
+        scaleX: 0,
+        transformOrigin: "left center",
+      });
+
+      const duration = prefersReducedMotion ? 0 : 0.28;
+
+      const open = contextSafe(() => {
+        gsap.to(egg, {
+          scaleX: 1,
+          duration,
+          ease: motion.easeEnter,
+          overwrite: "auto",
+        });
+      });
+
+      const close = contextSafe(() => {
+        gsap.to(egg, {
+          scaleX: 0,
+          duration,
+          ease: motion.easeEnter,
+          overwrite: "auto",
+        });
+      });
+
+      pair.addEventListener("pointerenter", open);
+      pair.addEventListener("pointerleave", close);
+      pair.addEventListener("focus", open);
+      pair.addEventListener("blur", close);
+
+      return () => {
+        pair.removeEventListener("pointerenter", open);
+        pair.removeEventListener("pointerleave", close);
+        pair.removeEventListener("focus", open);
+        pair.removeEventListener("blur", close);
+      };
+    },
+    { scope: pairRef, dependencies: [prefersReducedMotion] },
+  );
+
+  return (
+    <div
+      ref={pairRef}
+      className="social-egg-pair social-desktop-only"
+      tabIndex={0}
+    >
+      <SocialFeedPost item={item} />
+      <div ref={eggRef} className="social-post social-egg" aria-hidden="true">
+        <span className="social-avatar social-avatar-sm">
+          {/* DiceBear Close Up is SVG; next/image does not optimize it. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={JERKIN_AVATAR}
+            alt="Jerkin Jenkins"
+            width={64}
+            height={64}
+          />
+        </span>
+        <p>
+          <strong>Jerkin Jenkins</strong> is now gooning to feet pics.
+        </p>
+      </div>
+    </div>
+  );
 }
 
 function isDesktopOnly(element: HTMLElement) {
@@ -341,25 +453,22 @@ export function SocialWebScene() {
               aria-label="Status updates"
             >
               <p className="social-feed-label">updates</p>
-              {SOCIAL_FEED.map((item) => (
-                <div
-                  key={item.id}
-                  className={`social-post${
-                    item.desktopOnly ? " social-desktop-only" : ""
-                  }`}
-                  aria-hidden={item.desktopOnly || undefined}
-                >
-                  <span
-                    className="social-avatar social-avatar-sm"
-                    style={{ background: item.color }}
-                  >
-                    {item.initial}
-                  </span>
-                  <p>
-                    <strong>{item.name}</strong> {item.text}
-                  </p>
-                </div>
-              ))}
+              {SOCIAL_FEED.map((item) => {
+                if (item.id !== "suki") {
+                  return (
+                    <SocialFeedPost
+                      key={item.id}
+                      item={item}
+                      className={
+                        item.desktopOnly ? "social-desktop-only" : undefined
+                      }
+                      ariaHidden={item.desktopOnly}
+                    />
+                  );
+                }
+
+                return <SukiEggPost key={item.id} item={item} />;
+              })}
             </div>
           </div>
         </div>

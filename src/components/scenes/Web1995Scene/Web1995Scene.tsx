@@ -339,15 +339,6 @@ export function Web1995Scene() {
               0.34,
             )
             .to(
-              root,
-              {
-                backgroundColor: "#141618",
-                duration: 0.45,
-                ease: motion.easeCinematic,
-              },
-              0.48,
-            )
-            .to(
               svg.querySelectorAll("line"),
               {
                 strokeDashoffset: 0,
@@ -356,6 +347,15 @@ export function Web1995Scene() {
                 ease: motion.easeLinear,
               },
               0.58,
+            )
+            .to(
+              root,
+              {
+                backgroundColor: "#141618",
+                duration: 0.55,
+                ease: motion.easeCinematic,
+              },
+              0.78,
             )
             .to(
               world,
