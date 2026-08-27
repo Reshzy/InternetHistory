@@ -1662,7 +1662,15 @@ html.has-custom-cursor textarea {
   padding: 0.7rem 0.55rem;
   font-size: 0.72rem;
   color: #2c405c;
+  text-align: center;
   will-change: width, opacity, padding;
+}
+
+.pocket-rail > * {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  text-align: center;
 }
 
 .pocket-main {
