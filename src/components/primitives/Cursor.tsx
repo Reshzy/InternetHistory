@@ -42,8 +42,9 @@ export function Cursor() {
           return;
         }
         const interactive = target.closest("a, button");
+        const generated = target.closest('[data-cursor-scene="generated"]');
         gsap.to(ring, {
-          scale: interactive ? 1.55 : 1,
+          scale: interactive ? 1.55 : generated ? 1.35 : 1,
           duration: 0.18,
           ease: "power2.out",
         });

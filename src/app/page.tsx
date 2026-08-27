@@ -1,7 +1,9 @@
 import { MuseumNav } from "@/components/chrome/MuseumNav";
 import { Cursor } from "@/components/primitives/Cursor";
+import { AIWebScene } from "@/components/scenes/AIWebScene";
 import { BootScene } from "@/components/scenes/BootScene";
 import { EraPlaceholder } from "@/components/scenes/EraPlaceholder";
+import { GeneratedWebScene } from "@/components/scenes/GeneratedWebScene";
 import { MobileWebScene } from "@/components/scenes/MobileWebScene";
 import { ModernWebScene } from "@/components/scenes/ModernWebScene";
 import { PlatformWebScene } from "@/components/scenes/PlatformWebScene";
@@ -31,6 +33,8 @@ export default function Home() {
         <MobileWebScene />
         <PlatformWebScene />
         <ModernWebScene />
+        <AIWebScene />
+        <GeneratedWebScene />
         {placeholderEras.map((era) => (
           <EraPlaceholder key={era.id} era={era} />
         ))}

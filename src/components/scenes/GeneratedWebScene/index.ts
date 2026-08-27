@@ -1,0 +1,1 @@
+export { GeneratedWebScene } from "./GeneratedWebScene";

@@ -83,7 +83,9 @@ export const eras: Era[] = [
     shortTitle: "AI",
     theme: "ai",
     statement: "THE WEB STARTED ANSWERING BACK.",
-    status: "placeholder",
+    support:
+      "A prompt became a page. Text turned into layout. The interface started writing itself.",
+    status: "built",
   },
   {
     id: "generated-web",
@@ -92,7 +94,8 @@ export const eras: Era[] = [
     shortTitle: "Generated",
     theme: "generated",
     statement: "WHAT IF THE WEBSITE IS NO LONGER A FIXED PLACE?",
-    status: "placeholder",
+    support: "Pages used to wait. Now they rearrange around you.",
+    status: "built",
   },
   {
     id: "next",

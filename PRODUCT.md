@@ -40,7 +40,7 @@ Confirmed for v1:
 - No Three.js until later phases explicitly need it
 - No clone of a specific commercial OS, browser, or social network
 
-Current implementation scope is Phases 0–5: foundation, museum shell, Boot, 1995 Document Web, 1999 Wild Web, 2004 Social Web, 2007 Mobile Shift, 2012 Platform Web, and 2018 Polished Web. Later eras exist as navigable placeholders.
+Current implementation scope is Phases 0–6: foundation, museum shell, Boot, 1995 Document Web, 1999 Wild Web, 2004 Social Web, 2007 Mobile Shift, 2012 Platform Web, 2018 Polished Web, 2023 AI Web, and 2026 Generated Web. The NEXT era remains a navigable placeholder.
 
 Explicitly not v1: optional audio, WebGL tunnels, CMS, localization, user-submitted memories, analytics, multiplayer, or a complete academic history of the internet.
 
