@@ -388,13 +388,12 @@ export function SocialWebScene() {
                 {SOCIAL_SELF.name} — profile
               </p>
               <div className="social-profile-body">
-                <span
-                  className="social-avatar social-avatar-lg"
-                  style={{ background: SOCIAL_SELF.color }}
-                  aria-hidden="true"
-                >
-                  {SOCIAL_SELF.initial}
-                </span>
+                <SocialAvatar
+                  className="social-avatar-lg"
+                  initial={SOCIAL_SELF.initial}
+                  color={SOCIAL_SELF.color}
+                  src={SOCIAL_SELF.avatar}
+                />
                 <div>
                   <p className="social-year">{era.year}</p>
                   <h2 id="social-web-heading">{era.statement}</h2>

@@ -6,10 +6,15 @@ import { SocialAvatar } from "@/components/primitives/SocialAvatar";
 import { getEra } from "@/lib/eras";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { motion } from "@/lib/motion";
-import { SOCIAL_FEED, SOCIAL_SELF } from "@/lib/socialPeople";
+import {
+  SOCIAL_FEED,
+  SOCIAL_POCKET_EXTRA,
+  SOCIAL_SELF,
+} from "@/lib/socialPeople";
 
 const POCKET_NAV = ["Wall", "Friends", "Inbox", "Search"] as const;
 const PROFILE_HANDLE = SOCIAL_SELF.name.split(" ")[0].toLowerCase();
+const RAIL_PAD = "0.7rem 0.55rem";
 
 function deskSize(root: HTMLElement, stage: HTMLElement) {
   return {
@@ -61,6 +66,10 @@ export function MobileWebScene() {
       }
 
       const mm = gsap.matchMedia();
+      const extraSpan = posts
+        .slice(-2)
+        .reduce((sum, post) => sum + post.offsetHeight, 0);
+      const scrollBy = Math.max(88, extraSpan * 0.92);
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
         const phone = phoneSize(root, stage);
@@ -74,10 +83,15 @@ export function MobileWebScene() {
         gsap.set(ear, { autoAlpha: 1, height: 6, marginBottom: 8 });
         gsap.set(home, { autoAlpha: 1, scale: 1, height: 18, marginTop: 10 });
         gsap.set(chrome, { autoAlpha: 0, maxHeight: 0, padding: 0 });
-        gsap.set(rail, { autoAlpha: 0, width: 0, padding: 0 });
+        gsap.set(rail, {
+          autoAlpha: 0,
+          width: 0,
+          minWidth: 0,
+          padding: 0,
+        });
         gsap.set(topnav, { autoAlpha: 1, maxHeight: 36, y: 0 });
         gsap.set(posts, { paddingTop: 12, paddingBottom: 12 });
-        gsap.set(hint, { autoAlpha: 0.85, scale: 1 });
+        gsap.set(hint, { autoAlpha: 0.85, scale: 1, y: 0 });
         gsap.set(feed, { y: 0 });
       });
 
@@ -110,10 +124,12 @@ export function MobileWebScene() {
           gsap.set(rail, {
             autoAlpha: isMobile ? 0 : 1,
             width: isMobile ? 0 : 128,
+            minWidth: 0,
+            padding: isMobile ? 0 : RAIL_PAD,
           });
           gsap.set(topnav, { autoAlpha: 0, maxHeight: 0, y: 0 });
           gsap.set(posts, { paddingTop: 7, paddingBottom: 7 });
-          gsap.set(hint, { autoAlpha: 0, scale: 0.6 });
+          gsap.set(hint, { autoAlpha: 0, scale: 0.6, y: 0 });
           gsap.set(feed, { y: 0 });
 
           const timeline = gsap.timeline({
@@ -179,6 +195,8 @@ export function MobileWebScene() {
               {
                 autoAlpha: 0,
                 width: 0,
+                minWidth: 0,
+                padding: 0,
                 duration: 0.32,
                 ease: motion.easeEnter,
               },
@@ -214,8 +232,30 @@ export function MobileWebScene() {
               },
               0.72,
             )
-            .to(feed, { y: -14, duration: 0.16, ease: motion.easeLinear }, 0.82)
-            .to(feed, { y: 0, duration: 0.22, ease: motion.easeEnter }, 0.9);
+            .to(
+              hint,
+              { y: scrollBy * 0.72, duration: 0.28, ease: motion.easeCinematic },
+              0.78,
+            )
+            .to(
+              feed,
+              { y: -scrollBy, duration: 0.28, ease: motion.easeCinematic },
+              0.78,
+            )
+            .to(
+              hint,
+              { y: scrollBy * 0.86, duration: 0.12, ease: motion.easeEnter },
+              0.9,
+            )
+            .to(
+              feed,
+              {
+                y: -scrollBy * 0.88,
+                duration: 0.14,
+                ease: motion.easeEnter,
+              },
+              0.9,
+            );
         },
       );
 
@@ -224,10 +264,10 @@ export function MobileWebScene() {
     { scope: rootRef },
   );
 
-  const visibleFeed = SOCIAL_FEED.filter((item) => !item.desktopOnly).slice(
-    0,
-    4,
-  );
+  const visibleFeed = [
+    ...SOCIAL_FEED.filter((item) => !item.desktopOnly),
+    ...SOCIAL_POCKET_EXTRA,
+  ];
 
   return (
     <section
@@ -273,7 +313,7 @@ export function MobileWebScene() {
                 </nav>
 
                 <div className="pocket-feed" data-pocket-feed aria-hidden="true">
-                  {visibleFeed.map((item, index) => (
+                  {visibleFeed.map((item) => (
                     <div
                       key={item.id}
                       className="pocket-post"
@@ -288,12 +328,11 @@ export function MobileWebScene() {
                       <p>
                         <strong>{item.name}</strong> {item.text}
                       </p>
-                      {index === 1 ? (
-                        <span className="touch-hint" data-touch-hint />
-                      ) : null}
                     </div>
                   ))}
                 </div>
+
+                <span className="touch-hint" data-touch-hint />
               </div>
             </div>
           </DeviceFrame>

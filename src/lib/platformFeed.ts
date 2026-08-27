@@ -96,12 +96,7 @@ const fromPeople: PlatformPost[] = people.map((person) => {
     viewsEnd: extra?.viewsEnd ?? 64000,
     time: extra?.time ?? "now",
     media: extra?.media ?? "#d0d4da",
-    avatar:
-      person.id === "mira" || person.id === "ada"
-        ? "avatar" in person
-          ? person.avatar
-          : undefined
-        : undefined,
+    avatar: "avatar" in person ? person.avatar : undefined,
     desktopOnly: extra?.desktopOnly,
   };
 });

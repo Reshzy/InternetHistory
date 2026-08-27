@@ -10,12 +10,33 @@ export type SocialPerson = {
 
 const DICEBEAR = "https://api.dicebear.com/10.x";
 
+function toFeedItem(person: {
+  id: string;
+  name: string;
+  initial: string;
+  color: string;
+  status: string;
+  avatar?: string;
+  desktopOnly?: boolean;
+}) {
+  return {
+    id: person.id,
+    name: person.name,
+    initial: person.initial,
+    color: person.color,
+    text: person.status,
+    avatar: person.avatar,
+    desktopOnly: person.desktopOnly ?? false,
+  };
+}
+
 export const SOCIAL_SELF = {
   id: "rae",
   name: "Rae Solis",
   initial: "R",
   color: "#3a5578",
   status: "updated their profile",
+  avatar: `${DICEBEAR}/planets/svg?seed=Rae+Solis&tags=animation&size=64`,
 } as const;
 
 export const SOCIAL_PEOPLE: SocialPerson[] = [
@@ -68,12 +89,25 @@ export const SOCIAL_NOTES = [
   { id: "n3", text: "Suki wrote: see you after class", desktopOnly: true },
 ] as const;
 
-export const SOCIAL_FEED = [SOCIAL_SELF, ...SOCIAL_PEOPLE].map((person) => ({
-  id: person.id,
-  name: person.name,
-  initial: person.initial,
-  color: person.color,
-  text: person.status,
-  avatar: "avatar" in person ? person.avatar : undefined,
-  desktopOnly: "desktopOnly" in person ? person.desktopOnly : false,
-}));
+export const SOCIAL_FEED = [SOCIAL_SELF, ...SOCIAL_PEOPLE].map(toFeedItem);
+
+export const SOCIAL_POCKET_EXTRA = (
+  [
+    {
+      id: "resh",
+      name: "Resh",
+      initial: "R",
+      color: "#4d6a4a",
+      status: "is now married to Sera",
+      avatar: `${DICEBEAR}/sprouts/svg?seed=Resh&tags=animation&size=64`,
+    },
+    {
+      id: "sera",
+      name: "Sera",
+      initial: "S",
+      color: "#7a4e62",
+      status: "is now married to Resh",
+      avatar: `${DICEBEAR}/sprouts/svg?seed=Sera&tags=animation&size=64`,
+    },
+  ] satisfies SocialPerson[]
+).map(toFeedItem);

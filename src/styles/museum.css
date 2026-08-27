@@ -1647,11 +1647,14 @@ html.has-custom-cursor textarea {
   display: flex;
   min-height: 0;
   flex: 1;
+  overflow: hidden;
 }
 
 .pocket-rail {
   display: flex;
   width: 8rem;
+  min-width: 0;
+  flex-shrink: 0;
   flex-direction: column;
   gap: 0.35rem;
   overflow: hidden;
@@ -1659,7 +1662,7 @@ html.has-custom-cursor textarea {
   padding: 0.7rem 0.55rem;
   font-size: 0.72rem;
   color: #2c405c;
-  will-change: width, opacity;
+  will-change: width, opacity, padding;
 }
 
 .pocket-main {
@@ -1702,15 +1705,16 @@ html.has-custom-cursor textarea {
 
 .touch-hint {
   position: absolute;
-  right: 0.7rem;
-  top: 50%;
+  z-index: 2;
+  right: 0.85rem;
+  top: 42%;
   width: 1.35rem;
   height: 1.35rem;
   border: 2px solid #3a5578;
   border-radius: 50%;
   background: rgba(58, 85, 120, 0.22);
-  transform: translateY(-50%);
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 @media (max-width: 767px) {
