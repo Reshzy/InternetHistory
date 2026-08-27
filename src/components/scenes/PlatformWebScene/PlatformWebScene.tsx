@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { SocialAvatar } from "@/components/primitives/SocialAvatar";
 import { getEra } from "@/lib/eras";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { motion } from "@/lib/motion";
@@ -320,12 +321,12 @@ export function PlatformWebScene() {
                       aria-hidden="true"
                     >
                       <header className="platform-post-head">
-                        <span
+                        <SocialAvatar
                           className="platform-avatar"
-                          style={{ background: post.color }}
-                        >
-                          {post.initial}
-                        </span>
+                          initial={post.initial}
+                          color={post.color}
+                          src={post.avatar}
+                        />
                         <div>
                           <p className="platform-post-name">{post.name}</p>
                           <p className="platform-post-time">{post.time}</p>

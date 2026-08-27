@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { DeviceFrame } from "@/components/primitives/DeviceFrame";
+import { SocialAvatar } from "@/components/primitives/SocialAvatar";
 import { getEra } from "@/lib/eras";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { motion } from "@/lib/motion";
@@ -278,12 +279,12 @@ export function MobileWebScene() {
                       className="pocket-post"
                       data-pocket-post
                     >
-                      <span
-                        className="social-avatar social-avatar-sm"
-                        style={{ background: item.color }}
-                      >
-                        {item.initial}
-                      </span>
+                      <SocialAvatar
+                        className="social-avatar-sm"
+                        initial={item.initial}
+                        color={item.color}
+                        src={item.avatar}
+                      />
                       <p>
                         <strong>{item.name}</strong> {item.text}
                       </p>

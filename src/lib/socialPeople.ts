@@ -4,14 +4,17 @@ export type SocialPerson = {
   initial: string;
   color: string;
   status: string;
+  avatar?: string;
   desktopOnly?: boolean;
 };
+
+const DICEBEAR = "https://api.dicebear.com/10.x";
 
 export const SOCIAL_SELF = {
   id: "rae",
   name: "Rae Solis",
   initial: "R",
-    color: "#3a5578",
+  color: "#3a5578",
   status: "updated their profile",
 } as const;
 
@@ -22,6 +25,7 @@ export const SOCIAL_PEOPLE: SocialPerson[] = [
     initial: "M",
     color: "#3f5c88",
     status: "posted a photo from the roof",
+    avatar: `${DICEBEAR}/critters/svg?seed=Mira+Chen&tags=animation&size=64`,
   },
   {
     id: "jonas",
@@ -36,6 +40,7 @@ export const SOCIAL_PEOPLE: SocialPerson[] = [
     initial: "A",
     color: "#2f6f52",
     status: "commented on your wall",
+    avatar: `${DICEBEAR}/voxel-art/svg?seed=Ada+Okonkwo&tags=animation&size=64`,
     desktopOnly: true,
   },
   {
@@ -44,6 +49,7 @@ export const SOCIAL_PEOPLE: SocialPerson[] = [
     initial: "L",
     color: "#5c3d72",
     status: "joined the network",
+    avatar: `${DICEBEAR}/adventurer-neutral/svg?seed=Lev+Hart&scale=1.3&size=64`,
     desktopOnly: true,
   },
   {
@@ -68,5 +74,6 @@ export const SOCIAL_FEED = [SOCIAL_SELF, ...SOCIAL_PEOPLE].map((person) => ({
   initial: person.initial,
   color: person.color,
   text: person.status,
+  avatar: "avatar" in person ? person.avatar : undefined,
   desktopOnly: "desktopOnly" in person ? person.desktopOnly : false,
 }));

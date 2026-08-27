@@ -1916,6 +1916,7 @@ html.has-custom-cursor textarea {
   width: 1.7rem;
   height: 1.7rem;
   flex-shrink: 0;
+  overflow: hidden;
   place-items: center;
   border-radius: 50%;
   color: #f7f8fa;

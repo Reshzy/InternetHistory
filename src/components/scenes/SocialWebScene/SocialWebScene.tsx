@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { SocialAvatar } from "@/components/primitives/SocialAvatar";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { getEra } from "@/lib/eras";
 import { gsap, useGSAP } from "@/lib/gsap";
@@ -64,12 +65,12 @@ function SocialFeedPost({
       className={["social-post", className].filter(Boolean).join(" ")}
       aria-hidden={ariaHidden || undefined}
     >
-      <span
-        className="social-avatar social-avatar-sm"
-        style={{ background: item.color }}
-      >
-        {item.initial}
-      </span>
+      <SocialAvatar
+        className="social-avatar-sm"
+        initial={item.initial}
+        color={item.color}
+        src={item.avatar}
+      />
       <p>
         <strong>{item.name}</strong> {item.text}
       </p>
@@ -418,12 +419,11 @@ export function SocialWebScene() {
                 data-social-person
                 aria-hidden="true"
               >
-                <span
-                  className="social-avatar"
-                  style={{ background: person.color }}
-                >
-                  {person.initial}
-                </span>
+                <SocialAvatar
+                  initial={person.initial}
+                  color={person.color}
+                  src={person.avatar}
+                />
                 <p className="social-person-name">{person.name}</p>
                 <p className="social-person-status">{person.status}</p>
               </article>
