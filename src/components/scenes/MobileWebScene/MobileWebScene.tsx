@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DeviceFrame } from "@/components/primitives/DeviceFrame";
 import { SocialAvatar } from "@/components/primitives/SocialAvatar";
 import { getEra } from "@/lib/eras";
@@ -9,12 +9,15 @@ import { motion } from "@/lib/motion";
 import {
   SOCIAL_FEED,
   SOCIAL_POCKET_EXTRA,
+  SOCIAL_POCKET_INBOX,
   SOCIAL_SELF,
 } from "@/lib/socialPeople";
 
 const POCKET_NAV = ["Wall", "Friends", "Inbox", "Search"] as const;
 const PROFILE_HANDLE = SOCIAL_SELF.name.split(" ")[0].toLowerCase();
 const RAIL_PAD = "0.7rem 0.55rem";
+
+type PocketTab = "wall" | "inbox";
 
 function deskSize(root: HTMLElement, stage: HTMLElement) {
   return {
@@ -30,9 +33,36 @@ function phoneSize(root: HTMLElement, stage: HTMLElement) {
   };
 }
 
+function PocketNavItems({
+  tab,
+  onTab,
+}: {
+  tab: PocketTab;
+  onTab: (next: PocketTab) => void;
+}) {
+  return POCKET_NAV.map((item) => {
+    if (item === "Wall" || item === "Inbox") {
+      const id = item.toLowerCase() as PocketTab;
+      return (
+        <button
+          key={item}
+          type="button"
+          aria-current={tab === id ? "page" : undefined}
+          onClick={() => onTab(id)}
+        >
+          {item}
+        </button>
+      );
+    }
+
+    return <span key={item}>{item}</span>;
+  });
+}
+
 export function MobileWebScene() {
   const era = getEra("mobile-web");
   const rootRef = useRef<HTMLElement>(null);
+  const [tab, setTab] = useState<PocketTab>("wall");
 
   useGSAP(
     () => {
@@ -295,24 +325,30 @@ export function MobileWebScene() {
             </header>
 
             <div className="pocket-app">
-              <aside className="pocket-rail" data-pocket-rail aria-hidden="true">
-                {POCKET_NAV.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
+              <aside className="pocket-rail" data-pocket-rail>
+                <PocketNavItems tab={tab} onTab={setTab} />
               </aside>
 
-              <div className="pocket-main">
+              <div
+                className={`pocket-main${tab === "inbox" ? " is-inbox" : ""}`}
+              >
                 <nav
                   className="pocket-topnav"
                   data-pocket-topnav
-                  aria-hidden="true"
+                  data-pocket-tab={tab}
                 >
-                  {POCKET_NAV.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
+                  <div className="pocket-topnav-row">
+                    <PocketNavItems tab={tab} onTab={setTab} />
+                  </div>
+                  <span className="pocket-nav-underline" aria-hidden="true" />
                 </nav>
 
-                <div className="pocket-feed" data-pocket-feed aria-hidden="true">
+                <div
+                  className="pocket-feed"
+                  data-pocket-feed
+                  hidden={tab === "inbox"}
+                  aria-hidden="true"
+                >
                   {visibleFeed.map((item) => (
                     <div
                       key={item.id}
@@ -325,6 +361,37 @@ export function MobileWebScene() {
                         color={item.color}
                         src={item.avatar}
                       />
+                      <p>
+                        <strong>{item.name}</strong> {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div
+                  className="pocket-inbox"
+                  hidden={tab !== "inbox"}
+                  role="region"
+                  aria-label="Inbox"
+                >
+                  {SOCIAL_POCKET_INBOX.map((item) => (
+                    <div
+                      key={item.id}
+                      className={`pocket-post pocket-message${
+                        item.unread ? " is-unread" : " is-read"
+                      }`}
+                    >
+                      <span className="pocket-avatar-wrap">
+                        <SocialAvatar
+                          className="social-avatar-sm"
+                          initial={item.initial}
+                          color={item.color}
+                          src={item.avatar}
+                        />
+                        {item.unread ? (
+                          <span className="pocket-unread-dot" aria-hidden="true" />
+                        ) : null}
+                      </span>
                       <p>
                         <strong>{item.name}</strong> {item.text}
                       </p>

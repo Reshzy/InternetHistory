@@ -1675,20 +1675,81 @@ html.has-custom-cursor textarea {
 }
 
 .pocket-topnav {
+  position: relative;
   display: flex;
   flex-shrink: 0;
   max-height: 0;
   overflow: hidden;
   background: #3d5a86;
   color: #fff;
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
-.pocket-topnav span {
+.pocket-topnav-row {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.pocket-topnav-row > * {
+  display: grid;
+  place-items: center;
   flex: 1;
   padding: 0.55rem 0.2rem;
-  font-size: 0.68rem;
+  font-size: inherit;
+  font-weight: inherit;
   letter-spacing: 0.04em;
+  line-height: inherit;
   text-align: center;
+}
+
+.pocket-topnav button,
+.pocket-rail button {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+.pocket-topnav button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+.pocket-rail button:focus-visible {
+  outline: 2px solid #3a5578;
+  outline-offset: 2px;
+}
+
+.pocket-nav-underline {
+  position: absolute;
+  left: 6.5%;
+  bottom: 0.2rem;
+  z-index: 1;
+  width: 12%;
+  height: 2px;
+  background: #fff;
+  pointer-events: none;
+}
+
+.pocket-topnav[data-pocket-tab="inbox"] .pocket-nav-underline {
+  left: 56.5%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pocket-nav-underline {
+    transition: left 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 }
 
 .pocket-feed {
@@ -1698,9 +1759,49 @@ html.has-custom-cursor textarea {
   will-change: transform;
 }
 
+.pocket-inbox {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+}
+
+.pocket-feed[hidden],
+.pocket-inbox[hidden] {
+  display: none;
+}
+
 .pocket-post {
   position: relative;
   background: #f7f8fa;
+}
+
+.pocket-message.is-unread strong,
+.pocket-message.is-unread p {
+  font-weight: 700;
+}
+
+.pocket-message.is-read p {
+  color: #3a4250;
+}
+
+.pocket-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pocket-unread-dot {
+  position: absolute;
+  top: -0.12rem;
+  right: -0.12rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  background: #c23b3b;
+  border: 1px solid #f7f8fa;
+  border-radius: 50%;
+}
+
+.pocket-main.is-inbox .touch-hint {
+  display: none;
 }
 
 .touch-hint {

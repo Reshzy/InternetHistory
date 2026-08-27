@@ -111,3 +111,24 @@ export const SOCIAL_POCKET_EXTRA = (
     },
   ] satisfies SocialPerson[]
 ).map(toFeedItem);
+
+export const SOCIAL_POCKET_INBOX = [
+  {
+    id: "kiel",
+    name: "Kiel",
+    initial: "K",
+    color: "#5a4a6a",
+    text: "I just turned into a femboy",
+    avatar: `${DICEBEAR}/gaze/svg?seed=Kiel&tags=animation&size=64`,
+    unread: true,
+  },
+  {
+    id: "tic",
+    name: "Tic",
+    initial: "T",
+    color: "#4a5c6a",
+    text: "bro im watching Skibidi Ohio: The Rizzler Awakens rn 💀💀 duke dennis just pulled up in the gyattmobile while baby gronk was mewing at the final boss 😭🙏",
+    avatar: `${DICEBEAR}/gaze/svg?seed=Tic&tags=animation&size=64`,
+    unread: false,
+  },
+] as const;
