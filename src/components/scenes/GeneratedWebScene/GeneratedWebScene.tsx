@@ -29,6 +29,8 @@ export function GeneratedWebScene() {
   const rootRef = useRef<HTMLElement>(null);
   const { isFine, isCoarse, canHover } = usePointerCapabilities();
   const canAttract = isFine && canHover && !isCoarse;
+  const canAttractRef = useRef(canAttract);
+  canAttractRef.current = canAttract;
 
   useGSAP(
     (_context, contextSafe) => {
@@ -104,8 +106,8 @@ export function GeneratedWebScene() {
           const pointer = { x: 0, y: 0 };
           let angle = 0;
 
-          gsap.set(shards, { autoAlpha: 0, y: 18, x: 0, scale: 1 });
-          gsap.set(buttons, { autoAlpha: 0, y: 8 });
+          gsap.set(shards, { autoAlpha: 1, y: 10, x: 0, scale: 1 });
+          gsap.set(buttons, { autoAlpha: 1, y: 6 });
           setChrome("place");
 
           const settle = () => {
@@ -181,7 +183,7 @@ export function GeneratedWebScene() {
               event.clientY - box.top - box.height / 2,
             );
 
-            if (!canAttract || isMobile || mode !== "place") {
+            if (!canAttractRef.current || isMobile || mode !== "place") {
               return;
             }
 
@@ -192,7 +194,7 @@ export function GeneratedWebScene() {
             });
           });
 
-          if (canAttract && !isMobile) {
+          if (!isMobile) {
             stage.addEventListener("pointermove", onPointerMove);
           }
 
@@ -205,8 +207,8 @@ export function GeneratedWebScene() {
               start: "top top",
               end: isMobile ? "+=70%" : "+=90%",
               pin: true,
-              scrub: 0.55,
-              anticipatePin: 1,
+              scrub: 0.35,
+              anticipatePin: 0,
               invalidateOnRefresh: true,
             },
           });
@@ -215,23 +217,21 @@ export function GeneratedWebScene() {
             .to(
               shards,
               {
-                autoAlpha: 1,
                 y: 0,
-                stagger: 0.07,
-                duration: 0.4,
+                stagger: 0.04,
+                duration: 0.22,
                 ease: motion.easeCinematic,
               },
-              0.08,
+              0,
             )
             .to(
               buttons,
               {
-                autoAlpha: 1,
                 y: 0,
-                stagger: 0.05,
-                duration: 0.28,
+                stagger: 0.03,
+                duration: 0.18,
               },
-              0.36,
+              0.06,
             );
 
           return () => {
@@ -249,7 +249,7 @@ export function GeneratedWebScene() {
         mm.revert();
       };
     },
-    { scope: rootRef, dependencies: [canAttract] },
+    { scope: rootRef },
   );
 
   return (

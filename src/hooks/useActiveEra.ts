@@ -1,54 +1,73 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { pinSpacerFor, triggerSectionId } from "@/lib/eraScroll";
+import { ScrollTrigger } from "@/lib/gsap";
 import type { EraId } from "@/types/museum";
+
+function visiblePx(el: Element) {
+  const rect = el.getBoundingClientRect();
+  return Math.max(
+    0,
+    Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0),
+  );
+}
 
 export function useActiveEra(ids: readonly EraId[], fallback: EraId) {
   const [activeId, setActiveId] = useState<EraId>(fallback);
 
   useEffect(() => {
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
+    const idSet = new Set<string>(ids);
 
-    if (sections.length === 0) {
-      return;
-    }
-
-    const ratios = new Map<string, number>();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.set(entry.target.id, entry.intersectionRatio);
+    const measure = () => {
+      const activeTriggers: { id: EraId; start: number }[] = [];
+      for (const trigger of ScrollTrigger.getAll()) {
+        const target = trigger.trigger;
+        if (!(target instanceof Element)) {
+          continue;
         }
+        const id = triggerSectionId(target);
+        if (idSet.has(id) && trigger.isActive) {
+          activeTriggers.push({ id: id as EraId, start: trigger.start });
+        }
+      }
 
-        let nextId = fallback;
-        let best = 0;
+      let nextId = fallback;
+      let best = 0;
+
+      if (activeTriggers.length > 0) {
+        activeTriggers.sort((a, b) => a.start - b.start);
+        nextId = activeTriggers[activeTriggers.length - 1].id;
+        best = 1;
+      } else {
         for (const id of ids) {
-          const ratio = ratios.get(id) ?? 0;
-          if (ratio > best) {
-            best = ratio;
+          const section = document.getElementById(id);
+          if (!section) {
+            continue;
+          }
+          const visible = visiblePx(pinSpacerFor(section));
+          if (visible > best) {
+            best = visible;
             nextId = id;
           }
         }
+      }
 
-        if (best > 0) {
-          setActiveId(nextId);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-18% 0px -52% 0px",
-        threshold: [0, 0.15, 0.35, 0.55, 0.75, 1],
-      },
-    );
+      if (best > 0) {
+        setActiveId(nextId);
+      }
+    };
 
-    for (const section of sections) {
-      observer.observe(section);
-    }
+    ScrollTrigger.addEventListener("update", measure);
+    ScrollTrigger.addEventListener("refresh", measure);
+    window.addEventListener("scroll", measure, { passive: true });
+    measure();
 
-    return () => observer.disconnect();
+    return () => {
+      ScrollTrigger.removeEventListener("update", measure);
+      ScrollTrigger.removeEventListener("refresh", measure);
+      window.removeEventListener("scroll", measure);
+    };
   }, [fallback, ids]);
 
   return activeId;

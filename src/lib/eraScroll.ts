@@ -2,14 +2,14 @@
 
 import { ScrollTrigger } from "@/lib/gsap";
 
-function triggerSectionId(target: Element) {
+export function triggerSectionId(target: Element) {
   if (target.classList.contains("museum-section") && target.id) {
     return target.id;
   }
   return target.closest(".museum-section")?.id ?? "";
 }
 
-function pinSpacerFor(el: HTMLElement) {
+export function pinSpacerFor(el: HTMLElement) {
   if (el.parentElement?.classList.contains("pin-spacer")) {
     return el.parentElement;
   }

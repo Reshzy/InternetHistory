@@ -53,26 +53,25 @@ export function FutureScene() {
         (context) => {
           const isMobile = Boolean(context.conditions?.isMobile);
 
-          gsap.set(intro, { autoAlpha: 0, y: 14 });
+          gsap.set([year, statement], { autoAlpha: 1, y: 0 });
+          gsap.set([question, prompt], { autoAlpha: 0, y: 10 });
 
           const timeline = gsap.timeline({
             defaults: { ease: motion.easeEnter },
             scrollTrigger: {
-              trigger: pin,
+              trigger: root,
+              pin,
               start: "top top",
               end: isMobile ? "+=50%" : "+=70%",
-              pin: true,
-              scrub: 0.55,
-              anticipatePin: 1,
+              scrub: 0.35,
+              anticipatePin: 0,
               invalidateOnRefresh: true,
             },
           });
 
           timeline
-            .to(year, { autoAlpha: 1, y: 0, duration: 0.28 }, 0)
-            .to(statement, { autoAlpha: 1, y: 0, duration: 0.42 }, 0.12)
-            .to(question, { autoAlpha: 1, y: 0, duration: 0.38 }, 0.4)
-            .to(prompt, { autoAlpha: 1, y: 0, duration: 0.32 }, 0.68);
+            .to(question, { autoAlpha: 1, y: 0, duration: 0.28 }, 0)
+            .to(prompt, { autoAlpha: 1, y: 0, duration: 0.24 }, 0.14);
         },
       );
 
