@@ -261,6 +261,7 @@ export function WildWebScene() {
           >
             <p className="wild-window-bar">guestbook.htm</p>
             <div className="wild-window-body">
+              <p>06/09/99 — y2k is sussus amogus</p>
               <p>12/04/99 — cool site!!! add me</p>
               <p>12/18/99 — the midi is stuck in my head</p>
               <p>12/31/99 — see you if the clocks survive</p>
@@ -289,6 +290,7 @@ export function WildWebScene() {
               <p>html_guides.htm</p>
               <p>space_gifs.htm</p>
               <p>how_to_midi.htm</p>
+              <p>skibidi_rizzler.ttt</p>
             </div>
           </div>
 
